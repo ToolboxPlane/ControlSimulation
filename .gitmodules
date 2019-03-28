@@ -1,0 +1,3 @@
+[submodule "RadioControlProtocolPy"]
+	path = RadioControlProtocolPy
+	url = git@github.com:ToolboxPlane/RadioControlProtocolPy.git
