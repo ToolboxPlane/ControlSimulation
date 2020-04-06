@@ -1,4 +1,4 @@
-class State:
+class PlaneState:
     def __init__(self):
         self.speed = 0
         self.x = 0
@@ -6,4 +6,7 @@ class State:
         self.z = 0
         self.yaw = 0
         self.pitch = 0
+        self.omega_pitch = 0
         self.roll = 0
+        self.omega_roll = 0
+
