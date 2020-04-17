@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 import matplotlib.lines
+import numpy as np
 
 
-def plot(ts: list, states: list):
+def plot(ts: np.ndarray, states: list):
     plt.figure()
 
     ax = plt.subplot(2, 2, 1)

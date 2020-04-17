@@ -22,12 +22,14 @@ def f(x: planestate.PlaneState, u: input.Input, dt: float) -> planestate.PlaneSt
     # Motor
     motor_rps = config.KV / 60 * config.V_BAT * u.power  # Motor dynamic is not modelled
 
-    # Speed
+    # Propeller
     motor_air_speed = motor_rps * config.PROP_PITCH
     relative_motor_air_speed = motor_air_speed - x.speed
-    volume_flow = relative_motor_air_speed * np.pi * config.PROP_RADIUS ** 2 * config.PROP_EFF
+    volume_flow = relative_motor_air_speed * np.pi * config.PROP_RADIUS**2 * config.PROP_EFF
     mass_flow = volume_flow * config.RHO_AIR
-    thrust = mass_flow * relative_motor_air_speed
+    thrust = mass_flow * motor_air_speed
+
+    # Speed
     air_resistance = config.CW * config.A_FRONT * 0.5 * config.RHO_AIR * x.speed ** 2
     gravitation = config.G * config.M_PLANE * np.sin(x.pitch)
     acc_force = thrust - air_resistance - gravitation
@@ -52,9 +54,6 @@ def f(x: planestate.PlaneState, u: input.Input, dt: float) -> planestate.PlaneSt
     elevon_r_force = elevon_in_thrust * np.abs(np.sin(elevon_angle_r))
     elevon_r_vert_force = elevon_r_force * np.sin(elevon_angle_r)
     elevon_r_horiz_force = elevon_r_force * np.sin(elevon_angle_r)
-
-    print("L: %f" % elevon_l_vert_force)
-    print("R: %f" % elevon_r_vert_force)
 
     pitch_torque = elevon_r_vert_force * config.ELEVON_DIST + elevon_l_vert_force * config.ELEVON_DIST
     roll_torque = elevon_r_vert_force * config.ELEVON_DIST - elevon_l_vert_force * config.ELEVON_DIST

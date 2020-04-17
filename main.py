@@ -1,13 +1,15 @@
 import numpy as np
+import time
 
 from planestate import PlaneState
 from input import Input
-from system import f
 from plot import plot
+import system
+
 
 def main():
     dt = 0.01
-    max_t = 10
+    max_t = 30
     ts = np.arange(0, max_t, dt)
 
     u = Input()
@@ -25,11 +27,12 @@ def main():
     states[0].omega_roll = 0
     states[0].omega_pitch = 0
 
-    for _ in ts[1:]:
-        states.append(f(states[-1], u, dt))
+    for t in ts[1:]:
+        states.append(system.f(states[-1], u, dt))
+        print("Time: %.1f (%.1f%%)" % (t, t / max_t * 100))
+        #time.sleep(dt)
 
     plot(ts, states)
-
 
 
 if __name__ == "__main__":
