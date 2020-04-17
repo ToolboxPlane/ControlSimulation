@@ -5,7 +5,7 @@ from planestate import PlaneState
 from input import Input
 from plot import plot
 import system
-
+import config
 
 def main():
     dt = 0.01
