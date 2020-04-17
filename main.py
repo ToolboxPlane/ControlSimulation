@@ -5,17 +5,15 @@ from planestate import PlaneState
 from input import Input
 from plot import plot
 import system
+import controller
 
 
 def main():
     dt = 0.01
-    max_t = 10
+    max_t = 30
     ts = np.arange(0, max_t, dt)
 
-    u = Input()
-    u.power = 1
-    u.elevon_l = 0
-    u.elevon_r = 0
+    control = controller.Controller()
 
     states = [PlaneState()]
     states[0].x = 0
@@ -29,6 +27,7 @@ def main():
 
     last_percent = 0
     for t in ts[1:]:
+        u = control.get(states[-1], t)
         new_state = system.f(states[-1], u, dt)
         states.append(new_state)
         # time.sleep(dt)
