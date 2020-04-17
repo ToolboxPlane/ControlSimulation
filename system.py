@@ -47,16 +47,11 @@ def f(x: planestate.PlaneState, u: input.Input, dt: float) -> planestate.PlaneSt
 
     elevon_in_thrust = 0.5 * x.speed * config.ELEVON_AREA * x.speed
 
-    elevon_l_force = elevon_in_thrust * np.abs(np.sin(elevon_angle_l))
-    elevon_l_vert_force = elevon_l_force * np.sin(elevon_angle_l)
-    elevon_l_horiz_force = elevon_l_force * np.sin(elevon_angle_l)
+    elevon_l_vert_force = elevon_in_thrust * np.sin(elevon_angle_l)
+    elevon_r_vert_force = elevon_in_thrust * np.sin(elevon_angle_r)
 
-    elevon_r_force = elevon_in_thrust * np.abs(np.sin(elevon_angle_r))
-    elevon_r_vert_force = elevon_r_force * np.sin(elevon_angle_r)
-    elevon_r_horiz_force = elevon_r_force * np.sin(elevon_angle_r)
-
-    pitch_torque = elevon_r_vert_force * config.ELEVON_DIST + elevon_l_vert_force * config.ELEVON_DIST
-    roll_torque = elevon_r_vert_force * config.ELEVON_DIST - elevon_l_vert_force * config.ELEVON_DIST
+    pitch_torque = elevon_r_vert_force * config.ELEVON_DIST_X + elevon_l_vert_force * config.ELEVON_DIST_X
+    roll_torque = elevon_r_vert_force * config.ELEVON_DIST_Y - elevon_l_vert_force * config.ELEVON_DIST_Y
 
     acc_pitch = pitch_torque / config.MOMENT_INERTIA_PITCH
     acc_roll = roll_torque / config.MOMENT_INERTIA_ROLL

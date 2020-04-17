@@ -10,7 +10,7 @@ import controller
 
 def main():
     dt = 0.01
-    max_t = 30
+    max_t = 100
     ts = np.arange(0, max_t, dt)
 
     control = controller.Controller()

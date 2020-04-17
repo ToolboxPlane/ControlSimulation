@@ -25,4 +25,7 @@ PROP_EFF = 0.7  # Efficiency of the propeller (GUESSED)
 
 SERVO_MAX_ANGLE = 35 * np.pi / 180  # Max deflection angle of the elevon
 ELEVON_AREA = 0.43 * 0.07  # Surface area of the elevon
-ELEVON_DIST = 0.6  # Distance from elevon centre to plane centre
+
+# Distance from elevon centre to plane centre
+ELEVON_DIST_X = 0.3
+ELEVON_DIST_Y = 0.6
